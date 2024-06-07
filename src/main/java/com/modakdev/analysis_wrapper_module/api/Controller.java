@@ -1,8 +1,8 @@
 package com.modakdev.analysis_wrapper_module.api;
 
 import com.modakdev.analysis_wrapper_module.api.services.LLMQueryServiceImpl;
-import com.modakdev.analysis_wrapper_module.models.request.LLMBaseRequest;
-import com.modakdev.analysis_wrapper_module.models.response.MDBaseResponse;
+import com.modakdev.request.LLMBaseRequest;
+import com.modakdev.response.MDBaseResponse;
 import org.json.simple.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,5 @@
 package com.modakdev.analysis_wrapper_module.api.client;
 
-import com.modakdev.analysis_wrapper_module.models.response.MDBaseResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;

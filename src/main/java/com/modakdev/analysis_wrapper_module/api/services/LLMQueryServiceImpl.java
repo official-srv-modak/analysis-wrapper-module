@@ -1,7 +1,7 @@
 package com.modakdev.analysis_wrapper_module.api.services;
 
 import com.modakdev.analysis_wrapper_module.api.client.AnalysisModuleClient;
-import com.modakdev.analysis_wrapper_module.models.response.MDBaseResponse;
+import com.modakdev.response.MDBaseResponse;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
