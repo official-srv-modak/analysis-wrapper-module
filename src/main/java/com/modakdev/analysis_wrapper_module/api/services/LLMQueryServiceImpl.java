@@ -47,9 +47,17 @@ public class LLMQueryServiceImpl implements LLMQueryService{
         }
     }
 
-    public Flux<String> getStream(String query) {
+    public Flux<String> getChatStream(String query) {
         return webClient.post()
                 .uri("/chat-single-stream") // Replace with the actual endpoint
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue("{\"query\": \"" + query + "\"}") // Adjust body as needed
+                .retrieve()
+                .bodyToFlux(String.class); // Expecting a Flux of String
+    }
+    public Flux<String> getChatStreamSample(String query) {
+        return webClient.post()
+                .uri("/chat-single-stream-sample") // Replace with the actual endpoint
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue("{\"query\": \"" + query + "\"}") // Adjust body as needed
                 .retrieve()
