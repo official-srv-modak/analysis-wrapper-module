@@ -51,8 +51,11 @@ public class LLMQueryServiceImpl implements LLMQueryService{
         return webClient.post()
                 .uri("/chat-single-stream") // Replace with the actual endpoint
                 .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.TEXT_PLAIN) // Expect plain text response
                 .bodyValue("{\"query\": \"" + query + "\"}") // Adjust body as needed
                 .retrieve()
+//                .bodyToMono(String.class) // Expect a single text response
+
                 .bodyToFlux(String.class); // Expecting a Flux of String
     }
 }
