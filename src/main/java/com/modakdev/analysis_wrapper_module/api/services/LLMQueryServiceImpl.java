@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
+import java.time.Duration;
 import java.util.LinkedHashMap;
 
 import static com.modakdev.analysis_wrapper_module.LibraryFunctions.convertToJSONObject;
@@ -21,6 +22,8 @@ public class LLMQueryServiceImpl implements LLMQueryService{
     private final AnalysisModuleClient analysisModuleClient;
     private final WebClient webClient;
 
+    @Value("${sample.delay-duration}")
+    private String delayDurationValue;
 
     @Autowired
     public LLMQueryServiceImpl(AnalysisModuleClient analysisModuleClient, @Value("${flask.base-url}") String baseUrl, WebClient.Builder webClientBuilder) {
@@ -53,7 +56,9 @@ public class LLMQueryServiceImpl implements LLMQueryService{
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue("{\"query\": \"" + query + "\"}") // Adjust body as needed
                 .retrieve()
-                .bodyToFlux(String.class); // Expecting a Flux of String
+                .bodyToFlux(String.class) // Expecting a Flux of String
+                .delayElements(Duration.ofMillis(Long.parseLong(delayDurationValue)));
+
     }
     public Flux<String> getChatStreamSample(String query) {
         return webClient.post()
@@ -61,6 +66,8 @@ public class LLMQueryServiceImpl implements LLMQueryService{
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue("{\"query\": \"" + query + "\"}") // Adjust body as needed
                 .retrieve()
-                .bodyToFlux(String.class); // Expecting a Flux of String
+                .bodyToFlux(String.class) // Expecting a Flux of String
+                .delayElements(Duration.ofMillis(Long.parseLong(delayDurationValue)));
+
     }
 }
